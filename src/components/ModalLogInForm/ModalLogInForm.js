@@ -63,7 +63,7 @@ const ModalLogInForm = (props) => {
             <Divider />
             <form className={classes.form} onSubmit={handleLogIn}>
               <TextField
-                id="outlined-basic"
+                //id="outlined-basic"
                 label="Username"
                 variant="outlined"
                 fullWidth
