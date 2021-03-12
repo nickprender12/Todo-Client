@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# TuDu
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Try it [here](https://rocky-escarpment-21076.herokuapp.com/) back-end repo [here](https://github.com/nickprender12/Todo-api)
 
-## Available Scripts
+![Showcase GIF](/screenshots/recording-todo.gif)
+> Make an account and start managing your to-do list today!
 
-In the project directory, you can run:
+## About
 
-### `yarn start`
+This is a todo list application I build to learn React, nodeJS, and MongoDB. It is a work in progress and was my first time using a mongoDB NoSQL database. It was also my first time trying to implement user administration and password encryption and validation
+## Tech
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Frontend: <a href="https://github.com/facebook/react">`React`</a> with Hooks and Context Api
+- Styling: <a href="https://material-ui.com/">`Material-UI`</a>
+- Backend: <a href="https://github.com/expressjs/express">`Express`</a>
+- Database: <a href="https://www.mongodb.com/cloud/atlas">`MongoDB Atlas`</a>
+- Testing: <a href="https://jestjs.io/">`Jest`</a>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `yarn test`
+## Things Working
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- __Context API:__ Implemented the context api into the app to avoid prop drilling.
 
-### `yarn build`
+- __Styling:__ I used the material-ui library for the first time to style the application.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- __User Administration:__ ...
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- __MongoDB:__ ...
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+____
 
-### `yarn eject`
+## Todo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+All the things I would Like to add to this project.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [ ] Clean up component state through use of composition and `prop.children` to avoid over using the context api.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [ ] A more responsive styling to application.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [ ] Create a custom theme for styling.
 
-## Learn More
+## Architecture Diagram
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+in-progress
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Support
 
-### Code Splitting
+ Reach out to me if you have any questions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Email at <a href="mailto:nickprender@gmail.com">`nickprender@gmail.com`</a>
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ Thanks for taking a Look!
