@@ -1,17 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import useStyles from "./styles";
-import { TodoForm, TodoList } from "../index";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/Toolbar";
-import Grid from "@material-ui/core/Grid";
-import PropTypes from "prop-types";
-import { v4 as uuidv4 } from "uuid";
-import useTodoState from "../../hooks/useTodoState";
-import { SignUpContext } from "../../context/SignUpContext";
-import todoServices from "../../services/todos";
-//import todo from '../../../../server/models/todo';
+import React, { useState, useEffect, useContext } from 'react';
+import useStyles from './styles';
+import { TodoForm, TodoList } from '../index';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { SignUpContext } from '../../context/SignUpContext';
+import todoServices from '../../services/todos';
 
 const TodoApp = (props) => {
   const classes = useStyles(props);
@@ -31,16 +24,6 @@ const TodoApp = (props) => {
       });
     }
   }, [currentUser]);
-
-  //const initialTodos = JSON.parse(window.localStorage.getItem('todos') || '[]');
-
-  // const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
-  //   initialTodos
-  // );
-
-  // useEffect(() => {
-  //   window.localStorage.setItem('todos', JSON.stringify(todos));
-  // }, [todos]);
 
   const addTodo = (newTodoText) => {
     const todoObject = {
@@ -94,9 +77,5 @@ const TodoApp = (props) => {
     </Paper>
   );
 };
-
-// TodoApp.prototype = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default TodoApp;

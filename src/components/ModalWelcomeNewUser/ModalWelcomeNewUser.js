@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import useStyles from './styles';
-import PropTypes from 'prop-types';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';

@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import useStyles from "./styles";
-import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
-import { AppContext } from "../../context/AppContext";
-import { SignUpContext } from "../../context/SignUpContext";
+import React, { useContext } from 'react';
+import Button from '@material-ui/core/Button';
+import useStyles from './styles';
+import Typography from '@material-ui/core/Typography';
+import { AppContext } from '../../context/AppContext';
+import { SignUpContext } from '../../context/SignUpContext';
 const NavBar = (props) => {
   const classes = useStyles(props);
   const { handleOpen, handleLogInOpen } = useContext(AppContext);
