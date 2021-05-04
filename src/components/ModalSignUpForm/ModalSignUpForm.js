@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
-import useStyles from './styles';
-import PropTypes from 'prop-types';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import { AppContext } from '../../context/AppContext';
-import { SignUpContext } from '../../context/SignUpContext';
+import React, { useContext } from "react";
+import useStyles from "./styles";
+import PropTypes from "prop-types";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import Divider from "@material-ui/core/Divider";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import { AppContext } from "../../context/AppContext";
+import { SignUpContext } from "../../context/SignUpContext";
 
 const ModalSignUpForm = (props) => {
   const classes = useStyles(props);
@@ -71,7 +71,7 @@ const ModalSignUpForm = (props) => {
             <Divider />
             <form className={classes.form} onSubmit={handleCreateAccount}>
               <TextField
-                id="outlined-basic"
+                id="name"
                 label="Enter name"
                 variant="outlined"
                 helperText="We'll never share your personal information with anyone else."
@@ -83,7 +83,7 @@ const ModalSignUpForm = (props) => {
                 onChange={({ target }) => setName(target.value)}
               />
               <TextField
-                id="outlined-basic"
+                id="username"
                 label="Username"
                 variant="outlined"
                 fullWidth
@@ -94,7 +94,7 @@ const ModalSignUpForm = (props) => {
                 onChange={({ target }) => setUsername(target.value)}
               />
               <TextField
-                id="outlined-basic"
+                id="password"
                 label="Password"
                 variant="outlined"
                 fullWidth
@@ -111,7 +111,7 @@ const ModalSignUpForm = (props) => {
                 color="primary"
                 fullWidth
               >
-                {loading ? 'loading...' : 'Create your free account'}
+                {loading ? "loading..." : "Create your free account"}
               </Button>
             </form>
             <Divider />

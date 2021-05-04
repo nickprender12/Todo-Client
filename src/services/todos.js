@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-import axios from 'axios';
+import axios from "axios";
 
-const baseUrl = '/api/todos';
+const baseUrl = "/api/todos";
 let token = null;
 
 const setToken = (newToken) => {

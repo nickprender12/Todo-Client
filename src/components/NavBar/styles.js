@@ -1,46 +1,53 @@
-import { makeStyles } from '@material-ui/core/styles';
-import colors from '../../utils/colors';
+import { makeStyles } from "@material-ui/core/styles";
+import { MicNone } from "@material-ui/icons";
+import colors from "../../utils/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       // margin: theme.spacing(1),
     },
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '2px',
-    borderBottom: '.5px solid rgba(0, 0, 0, 0.466)',
-    fontSize: '30px',
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "2px",
+    borderBottom: ".5px solid rgba(0, 0, 0, 0.466)",
+    fontSize: "30px",
   },
   tuduLogo: {
-    fontSize: '2.5rem',
+    fontSize: "2.5rem",
   },
   btnList: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   logInBtn: {
-    marginRight: '10px',
+    marginRight: "10px",
     // backgroundColor: "blue",
     // color: "white",
-    border: '1px solid black',
+    border: "1px solid black",
   },
   signUpBtn: {
-    color: 'white',
+    color: "white",
     backgroundColor: `${colors.primaryColor}`,
-    border: 'none',
-    '&:hover': {
+    border: "none",
+    "&:hover": {
       backgroundColor: `${colors.pDarkColor}`,
     },
   },
   username: {
-    marginRight: '10px',
+    marginRight: "10px",
   },
   logOutBtn: {
-    marginRight: '10px',
-    border: '1px solid black',
+    marginRight: "10px",
+    border: "1px solid black",
+    fontWeight: "bold",
+    "&:hover": {
+      // backgroundColor: "grey",
+      // color: "white",
+      // border: "none",
+    },
   },
 }));
 

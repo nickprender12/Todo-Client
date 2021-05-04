@@ -1,8 +1,8 @@
-import React from 'react';
-import './App.css';
-import { NavBar, AppBody } from './components/index';
-import { AppProvider } from './context/AppContext';
-import { SignUpProvider } from './context/SignUpContext';
+import React from "react";
+import "./App.css";
+import { NavBar, AppBody, Footer } from "./components/index";
+import { AppProvider } from "./context/AppContext";
+import { SignUpProvider } from "./context/SignUpContext";
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
         <SignUpProvider>
           <NavBar />
           <AppBody />
+          <Footer />
         </SignUpProvider>
       </AppProvider>
     </div>

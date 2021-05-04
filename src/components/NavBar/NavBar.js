@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import useStyles from './styles';
-import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import { AppContext } from '../../context/AppContext';
-import { SignUpContext } from '../../context/SignUpContext';
+import React, { useContext, useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import useStyles from "./styles";
+import PropTypes from "prop-types";
+import Typography from "@material-ui/core/Typography";
+import { AppContext } from "../../context/AppContext";
+import { SignUpContext } from "../../context/SignUpContext";
 const NavBar = (props) => {
   const classes = useStyles(props);
   const { handleOpen, handleLogInOpen } = useContext(AppContext);
@@ -31,7 +31,11 @@ const NavBar = (props) => {
           <Typography className={classes.username}>
             {currentUser.username} logged in
           </Typography>
-          <Button className={classes.logOutBtn} onClick={handleLogOut}>
+          <Button
+            // variant="contained"
+            className={classes.logOutBtn}
+            onClick={handleLogOut}
+          >
             Sign Out
           </Button>
         </div>
@@ -40,8 +44,8 @@ const NavBar = (props) => {
   );
 };
 
-NavBar.prototype = {
-  classes: PropTypes.object.isRequired,
-};
+// NavBar.prototype = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default NavBar;

@@ -1,26 +1,26 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import userService from '../services/user';
-import loginService from '../services/login';
-import todoService from '../services/todos';
-import { AppContext } from './AppContext';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import userService from "../services/user";
+import loginService from "../services/login";
+import todoService from "../services/todos";
+import { AppContext } from "./AppContext";
 
 export const SignUpContext = createContext();
 
 export const SignUpProvider = (props) => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const { handleClose, setMessage, handleLogInClose } = useContext(AppContext);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedInTodoAppUser');
+    const loggedUserJSON = window.localStorage.getItem("loggedInTodoAppUser");
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setCurrentUser(user);
-      // console.log('userId:', user);
+      // console.log("userId:", user);
       todoService.setToken(user.token);
     }
   }, []);
@@ -34,18 +34,18 @@ export const SignUpProvider = (props) => {
         password: password,
       };
       await userService.create(userObject);
-      setName('');
-      setUsername('');
-      setPassword('');
+      setName("");
+      setUsername("");
+      setPassword("");
       handleClose();
-      setMessage('You did it!');
+      setMessage("You did it!");
       setTimeout(() => {
         setMessage(null);
       }, 3000);
 
-      console.log('Account created...');
+      // console.log("Account created...");
     } catch (exception) {
-      console.log('invalid username or password');
+      // console.log("invalid username or password");
     }
   };
 
@@ -56,16 +56,16 @@ export const SignUpProvider = (props) => {
         username,
         password,
       });
-      window.localStorage.setItem('loggedInTodoAppUser', JSON.stringify(user));
+      window.localStorage.setItem("loggedInTodoAppUser", JSON.stringify(user));
       todoService.setToken(user.token);
       setCurrentUser(user);
-      setUsername('');
-      setPassword('');
+      setUsername("");
+      setPassword("");
       setLoggedIn(true);
-      console.log('you are logged in');
+      // console.log("you are logged in");
     } catch (exception) {
-      setPassword('');
-      console.log('Wrong username or password');
+      setPassword("");
+      // console.log("Wrong username or password");
     }
   };
 
