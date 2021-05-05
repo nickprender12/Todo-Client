@@ -25,12 +25,14 @@ const useStyles = makeStyles((theme) => ({
     //backgroundColor: 'red',
   },
   listForm: {
-    // backgroundColor: 'rgba(0, 123, 255, .7)',
+    backgroundColor: 'rgba(0, 123, 255)',
     // backgroundImage:
     //   'linear-gradient(rgba(189, 189, 189, 1), rgba(227, 227, 227, .6))',
     padding: '20px',
     borderRadius: '4px',
+    boxShadow: '0px 5px 15px 0px rgba(0,0,0,0.39)',
   },
+  listForm2: {},
   // appBar: {
   //   height: '64px',
   //   width: '100vw',
