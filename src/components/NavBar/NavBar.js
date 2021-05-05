@@ -37,10 +37,9 @@ const NavBar = (props) => {
           <Button
             style={{ textTransform: 'none' }}
             variant="outlined"
-            // variant="contained"
             className={classes.logOutBtn}
             onClick={handleLogOut}
-            text-transform="none"
+            autoFocus={false}
           >
             Sign Out
           </Button>
