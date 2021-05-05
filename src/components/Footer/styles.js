@@ -7,7 +7,7 @@ export const Container = styled.div`
   /* flex-shrink: 0; */
   padding-top: 1rem;
   color: black;
-  margin-top: 12rem;
+  margin-top: 13rem;
   /* background: red; */
   /* @media screen and (max-width: 500px) {
     display: none;

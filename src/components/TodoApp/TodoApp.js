@@ -64,7 +64,7 @@ const TodoApp = (props) => {
         <Grid item xs={11} md={6} lg={4}>
           {/* <h1>TuDu List</h1> */}
           <div className={classes.listForm}>
-            <TodoForm addTodo={addTodo} className={classes.listForm2} />
+            <TodoForm addTodo={addTodo} />
             <TodoList
               todos={todos}
               removeTodo={removeTodo}
