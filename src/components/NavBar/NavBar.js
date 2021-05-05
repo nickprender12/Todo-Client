@@ -14,7 +14,11 @@ const NavBar = (props) => {
       <div className={classes.tuduLogo}>TuDu</div>
       {currentUser === null ? (
         <div className={classes.btnList}>
-          <Button className={classes.logInBtn} onClick={handleLogInOpen}>
+          <Button
+            className={classes.logInBtn}
+            onClick={handleLogInOpen}
+            variant="outlined"
+          >
             Sign In
           </Button>
           <Button
@@ -31,9 +35,12 @@ const NavBar = (props) => {
             {currentUser.username} logged in
           </Typography>
           <Button
+            style={{ textTransform: 'none' }}
+            variant="outlined"
             // variant="contained"
             className={classes.logOutBtn}
             onClick={handleLogOut}
+            text-transform="none"
           >
             Sign Out
           </Button>
@@ -42,9 +49,5 @@ const NavBar = (props) => {
     </div>
   );
 };
-
-// NavBar.prototype = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default NavBar;

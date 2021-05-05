@@ -23,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   logInBtn: {
     marginRight: '10px',
-    // backgroundColor: "blue",
-    // color: "white",
-    border: '1px solid black',
   },
   signUpBtn: {
     color: 'white',
@@ -40,13 +37,6 @@ const useStyles = makeStyles((theme) => ({
   },
   logOutBtn: {
     marginRight: '10px',
-    border: '1px solid black',
-    fontWeight: 'bold',
-    '&:hover': {
-      // backgroundColor: "grey",
-      // color: "white",
-      // border: "none",
-    },
   },
 }));
 
