@@ -1,7 +1,5 @@
 /* PLOP_INJECT_IMPORT */
 import EditTodoForm from './EditTodoForm';
-import NavBarSignedIn from './NavBarSignedIn';
-import NavBarSignedOut from './NavBarSignedOut';
 import Notification from './Notification';
 import ModalWelcomeNewUser from './ModalWelcomeNewUser';
 import ModalLogInForm from './ModalLogInForm';
@@ -17,13 +15,11 @@ import NavBar from './NavBar';
 
 export {
   /* PLOP_INJECT_EXPORT */
-	EditTodoForm,
-	NavBarSignedIn,
-	NavBarSignedOut,
-	Notification,
-	ModalWelcomeNewUser,
-	ModalLogInForm,
-	ModalSignUpForm,
+  EditTodoForm,
+  Notification,
+  ModalWelcomeNewUser,
+  ModalLogInForm,
+  ModalSignUpForm,
   TodoApp,
   TodoList,
   TodoForm,

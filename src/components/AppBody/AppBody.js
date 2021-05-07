@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { SignUpContext } from '../../context/SignUpContext';
 import { AppContext } from '../../context/AppContext';
 import Notification from '../Notification';
+
 const AppBody = (props) => {
   const { currentUser } = useContext(SignUpContext);
   const { message } = useContext(AppContext);
