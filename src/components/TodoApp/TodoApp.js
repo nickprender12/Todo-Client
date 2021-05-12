@@ -7,16 +7,11 @@ import { SignUpContext } from '../../context/SignUpContext';
 import todoServices from '../../services/todos';
 
 // import { useSelector, useDispatch } from 'react-redux';
-// import { addTodo, selectTodo } from '../../features/todo/todosSlice';
 
 const TodoApp = (props) => {
   const classes = useStyles(props);
   const { currentUser } = useContext(SignUpContext);
   const [todos, setTodos] = useState([]);
-
-  // const todos = useSelector(selectTodo);
-  // const dispatch = useDispatch();
-  // const [incrementAmount, setIncrementAmount] = useState('2')
 
   useEffect(() => {
     if (currentUser === null) {
@@ -69,7 +64,6 @@ const TodoApp = (props) => {
     <Paper className={classes.paper} elevation={0}>
       <Grid container justify="center">
         <Grid item xs={11} md={6} lg={4}>
-          {/* <h1>TuDu List</h1> */}
           <div className={classes.listForm}>
             <TodoForm addTodo={addTodo} />
             <TodoList

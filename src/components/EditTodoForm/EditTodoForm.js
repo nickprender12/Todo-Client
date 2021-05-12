@@ -2,15 +2,26 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import useInputState from '../../hooks/useInputState';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { todoUpdated } from '../../features/todo/todosSlice';
+
 const EditTodoForm = (props) => {
-  const { editTodo, id, title, toggle } = props;
-  const [value, handleChange, reset] = useInputState(title);
+  const { id, toggle } = props;
+  const todo = useSelector((state) =>
+    state.todos.find((todo) => todo.id === id)
+  );
+
+  const [title, handleChange, reset] = useInputState(todo.title);
+
+  const dispatch = useDispatch();
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        editTodo(id, value);
+        if (title) {
+          dispatch(todoUpdated({ id: id, title }));
+        }
         reset();
         toggle();
       }}
@@ -18,7 +29,7 @@ const EditTodoForm = (props) => {
     >
       <TextField
         margin="normal"
-        value={value}
+        value={title}
         onChange={handleChange}
         fullWidth
         autoFocus
