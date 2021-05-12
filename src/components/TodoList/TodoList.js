@@ -4,9 +4,12 @@ import { Todo } from '../index';
 import Paper from '@material-ui/core/paper';
 import useStyles from './styles';
 
+import { useSelector } from 'react-redux';
+
 const TodoList = (props) => {
   const classes = useStyles(props);
-  const { todos, removeTodo, toggleTodo, editTodo } = props;
+  const todos = useSelector((state) => state.todos);
+  // const { todos, removeTodo, toggleTodo, editTodo } = props;
 
   if (todos.length)
     return (
@@ -17,9 +20,9 @@ const TodoList = (props) => {
               <Todo
                 {...todo}
                 key={todo.id}
-                removeTodo={removeTodo}
-                toggleTodo={toggleTodo}
-                editTodo={editTodo}
+                // removeTodo={removeTodo}
+                // toggleTodo={toggleTodo}
+                // editTodo={editTodo}
                 index={i}
                 listLength={todos.length}
               />

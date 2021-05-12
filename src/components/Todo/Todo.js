@@ -14,10 +14,10 @@ const Todo = (props) => {
   const {
     title,
     status,
-    removeTodo,
+    // removeTodo,
     id,
-    toggleTodo,
-    editTodo,
+    // toggleTodo,
+    // editTodo,
     index,
     listLength,
   } = props;
@@ -27,12 +27,12 @@ const Todo = (props) => {
       <ListItem style={{ height: '64px' }} key={id}>
         {isEditing ? (
           <>
-            <EditTodoForm
+            {/* <EditTodoForm
               editTodo={editTodo}
               id={id}
               title={title}
               toggle={toggle}
-            />
+            /> */}
             <>
               <IconButton aria-label="Delete" disabled>
                 <DeleteIcon />
@@ -44,20 +44,20 @@ const Todo = (props) => {
           </>
         ) : (
           <>
-            <CheckBox
+            {/* <CheckBox
               tabIndex={-1}
               checked={status}
               onClick={() => toggleTodo(id)}
-            />
+            /> */}
             <ListItemText
               style={{ textDecoration: status ? 'line-through' : 'none' }}
             >
               {title}
             </ListItemText>
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
+              {/* <IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
                 <DeleteIcon />
-              </IconButton>
+              </IconButton> */}
               <IconButton aria-label="Edit" onClick={toggle}>
                 <EditIcon />
               </IconButton>

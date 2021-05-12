@@ -4,10 +4,18 @@ import Paper from '@material-ui/core/Paper';
 import useInputState from '../../hooks/useInputState';
 import useStyles from './styles';
 
+import { useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+
+import { todoAdded } from '../../features/todo/todosSlice';
+
 const TodoForm = (props) => {
   const classes = useStyles(props);
-  const { addTodo } = props;
-  const [value, handleChange, reset] = useInputState('');
+  // const { addTodo } = props;
+
+  const dispatch = useDispatch();
+
+  const [title, handleChange, reset] = useInputState('');
 
   return (
     <Paper
@@ -17,12 +25,19 @@ const TodoForm = (props) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          addTodo(value);
+          // addTodo(value);
+          dispatch(
+            todoAdded({
+              id: nanoid(),
+              title,
+              status: false,
+            })
+          );
           reset();
         }}
       >
         <TextField
-          value={value}
+          value={title}
           onChange={handleChange}
           margin="normal"
           label="Add new todo"

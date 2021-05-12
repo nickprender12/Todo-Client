@@ -6,10 +6,17 @@ import Grid from '@material-ui/core/Grid';
 import { SignUpContext } from '../../context/SignUpContext';
 import todoServices from '../../services/todos';
 
+// import { useSelector, useDispatch } from 'react-redux';
+// import { addTodo, selectTodo } from '../../features/todo/todosSlice';
+
 const TodoApp = (props) => {
   const classes = useStyles(props);
   const { currentUser } = useContext(SignUpContext);
   const [todos, setTodos] = useState([]);
+
+  // const todos = useSelector(selectTodo);
+  // const dispatch = useDispatch();
+  // const [incrementAmount, setIncrementAmount] = useState('2')
 
   useEffect(() => {
     if (currentUser === null) {
