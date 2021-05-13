@@ -19,7 +19,6 @@ const TodoList = (props) => {
               <Todo
                 {...todo}
                 key={todo.id}
-                // removeTodo={removeTodo}
                 index={i}
                 listLength={todos.length}
               />

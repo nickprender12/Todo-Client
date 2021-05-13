@@ -11,17 +11,10 @@ import { EditTodoForm } from '../index';
 import Divider from '@material-ui/core/Divider';
 
 import { useDispatch } from 'react-redux';
-import { todoUpdated } from '../../features/todo/todosSlice';
+import { todoUpdated, todoRemoved } from '../../features/todo/todosSlice';
 
 const Todo = (props) => {
-  const {
-    title,
-    status,
-    // removeTodo,
-    id,
-    index,
-    listLength,
-  } = props;
+  const { title, status, id, index, listLength } = props;
   const [isEditing, toggle] = useToggleState(false);
 
   const dispatch = useDispatch();
@@ -56,9 +49,14 @@ const Todo = (props) => {
               {title}
             </ListItemText>
             <ListItemSecondaryAction>
-              {/* <IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
+              <IconButton
+                aria-label="Delete"
+                onClick={() => {
+                  dispatch(todoRemoved({ id: id }));
+                }}
+              >
                 <DeleteIcon />
-              </IconButton> */}
+              </IconButton>
               <IconButton aria-label="Edit" onClick={toggle}>
                 <EditIcon />
               </IconButton>

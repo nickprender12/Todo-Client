@@ -26,8 +26,14 @@ export const todosSlice = createSlice({
         existingTodo.status = status;
       }
     },
+    todoRemoved(state, action) {
+      const todoToRemove = state.findIndex(
+        (todo) => todo.id === action.payload
+      );
+      state.splice(todoToRemove, 1);
+    },
   },
 });
-export const { todoAdded, todoUpdated } = todosSlice.actions;
+export const { todoAdded, todoUpdated, todoRemoved } = todosSlice.actions;
 
 export default todosSlice.reducer;
