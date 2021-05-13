@@ -40,7 +40,7 @@ const Todo = (props) => {
               tabIndex={-1}
               checked={status}
               onClick={() => {
-                dispatch(todoUpdated({ id: id, title, status: !status }));
+                dispatch(todoUpdated(id, title, !status));
               }}
             />
             <ListItemText
@@ -52,7 +52,7 @@ const Todo = (props) => {
               <IconButton
                 aria-label="Delete"
                 onClick={() => {
-                  dispatch(todoRemoved({ id: id }));
+                  dispatch(todoRemoved(id));
                 }}
               >
                 <DeleteIcon />

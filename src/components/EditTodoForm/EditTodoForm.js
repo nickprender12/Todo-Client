@@ -20,7 +20,7 @@ const EditTodoForm = (props) => {
       onSubmit={(e) => {
         e.preventDefault();
         if (title) {
-          dispatch(todoUpdated({ id: id, title, status: todo.status }));
+          dispatch(todoUpdated(id, title, todo.status));
         }
         reset();
         toggle();

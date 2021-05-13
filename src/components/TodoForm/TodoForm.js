@@ -11,9 +11,7 @@ import { todoAdded } from '../../features/todo/todosSlice';
 
 const TodoForm = (props) => {
   const classes = useStyles(props);
-
   const dispatch = useDispatch();
-
   const [title, handleChange, reset] = useInputState('');
 
   return (
@@ -24,13 +22,7 @@ const TodoForm = (props) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(
-            todoAdded({
-              id: nanoid(),
-              title,
-              status: false,
-            })
-          );
+          dispatch(todoAdded(title, false));
           reset();
         }}
       >

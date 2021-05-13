@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 // import todoServices from '../../services/todos';
 
 const initialState = [
@@ -15,22 +15,53 @@ export const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    todoAdded(state, action) {
-      state.push(action.payload);
+    todoAdded: {
+      reducer(state, action) {
+        state.push(action.payload);
+      },
+      prepare(title, status) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            status,
+          },
+        };
+      },
     },
-    todoUpdated(state, action) {
-      const { id, title, status } = action.payload;
-      const existingTodo = state.find((todo) => todo.id === id);
-      if (existingTodo) {
-        existingTodo.title = title;
-        existingTodo.status = status;
-      }
+    todoUpdated: {
+      reducer(state, action) {
+        const { id, title, status } = action.payload;
+        const existingTodo = state.find((todo) => todo.id === id);
+        if (existingTodo) {
+          existingTodo.title = title;
+          existingTodo.status = status;
+        }
+      },
+      prepare(id, title, status) {
+        return {
+          payload: {
+            id,
+            title,
+            status,
+          },
+        };
+      },
     },
-    todoRemoved(state, action) {
-      const todoToRemove = state.findIndex(
-        (todo) => todo.id === action.payload
-      );
-      state.splice(todoToRemove, 1);
+    todoRemoved: {
+      reducer(state, action) {
+        const todoToRemove = state.findIndex(
+          (todo) => todo.id === action.payload
+        );
+        state.splice(todoToRemove, 1);
+      },
+      prepare(id) {
+        return {
+          payload: {
+            id,
+          },
+        };
+      },
     },
   },
 });
