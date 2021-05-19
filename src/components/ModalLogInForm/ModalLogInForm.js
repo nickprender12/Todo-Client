@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { AppContext } from '../../context/AppContext';
 import { SignUpContext } from '../../context/SignUpContext';
 
+import addCurrentUser from '../../features/currentUser/currentUserSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 const ModalLogInForm = (props) => {
   const classes = useStyles(props);
   const { logInOpen, handleLogInClose } = useContext(AppContext);
@@ -24,6 +27,22 @@ const ModalLogInForm = (props) => {
     handleLogIn,
     loading,
   } = useContext(SignUpContext);
+
+  // const dispatch = useDispatch();
+
+  // const initialState = {
+  //   _id: '5fdbcffb738d8525006e8494',
+  //   todos: [],
+  //   username: 'rootadmin',
+  //   name: 'nick pre',
+  //   passwordHash:
+  //     '$2b$10$1MGeL7F/oypcfWwWnnw3UOWgDSKpgci0TMg2J2bbl7vx1m6B8cg02',
+  // };
+
+  // const logIn = (e) => {
+  //   e.preventDefault();
+  //   dispatch(addCurrentUser(initialState));
+  // };
 
   return (
     <div className={classes.root}>

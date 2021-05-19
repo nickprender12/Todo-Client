@@ -3,13 +3,13 @@ import TextField from '@material-ui/core/TextField';
 import useInputState from '../../hooks/useInputState';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { todoUpdated } from '../../features/todo/todosSlice';
+import { selectTodoById, updateTodo } from '../../features/todo/todosSlice';
+// import { TitleOutlined } from '@material-ui/icons';
 
 const EditTodoForm = (props) => {
   const { id, toggle } = props;
-  const todo = useSelector((state) =>
-    state.todos.find((todo) => todo.id === id)
-  );
+
+  const todo = useSelector((state) => selectTodoById(state, id));
 
   const [title, handleChange, reset] = useInputState(todo.title);
 
@@ -20,7 +20,7 @@ const EditTodoForm = (props) => {
       onSubmit={(e) => {
         e.preventDefault();
         if (title) {
-          dispatch(todoUpdated(id, title, todo.status));
+          dispatch(updateTodo({ title: title, status: todo.status, id: id }));
         }
         reset();
         toggle();

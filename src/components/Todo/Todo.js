@@ -11,7 +11,7 @@ import { EditTodoForm } from '../index';
 import Divider from '@material-ui/core/Divider';
 
 import { useDispatch } from 'react-redux';
-import { todoUpdated, todoRemoved } from '../../features/todo/todosSlice';
+import { updateTodo, removeTodo } from '../../features/todo/todosSlice';
 
 const Todo = (props) => {
   const { title, status, id, index, listLength } = props;
@@ -40,7 +40,8 @@ const Todo = (props) => {
               tabIndex={-1}
               checked={status}
               onClick={() => {
-                dispatch(todoUpdated(id, title, !status));
+                // dispatch(todoUpdated(id, title, !status));
+                dispatch(updateTodo({ title: title, status: !status, id }));
               }}
             />
             <ListItemText
@@ -52,7 +53,7 @@ const Todo = (props) => {
               <IconButton
                 aria-label="Delete"
                 onClick={() => {
-                  dispatch(todoRemoved(id));
+                  dispatch(removeTodo(id));
                 }}
               >
                 <DeleteIcon />
