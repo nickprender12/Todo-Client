@@ -1,18 +1,35 @@
-import { PictureInPictureAltRounded } from '@material-ui/icons';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import loginServices from '../../services/login';
 
 const initialState = {
-  _id: '5fdbcffb738d8525006e8494',
-  todos: [],
-  username: 'rootadmin',
-  name: 'nick pre',
-  passwordHash: '$2b$10$1MGeL7F/oypcfWwWnnw3UOWgDSKpgci0TMg2J2bbl7vx1m6B8cg02',
+  currentUser: null,
 };
+
+export const logIn = createAsyncThunk('currentUser/logIn', async (userObj) => {
+  const { username, password } = userObj;
+  const response = await loginServices.login({ username, password });
+
+  console.log(response);
+  const user = {
+    currentUser: response,
+  };
+  return user;
+});
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
   reducers: {
+    logout(state, action) {
+      state.currentUser = null;
+      // window.localStorage.clear();
+      // handleLogInClose();
+      //const { postId, reaction } = action.payload
+      // existingPost = state.posts.find((post) => post.id === postId)
+      // if (existingPost) {
+      //   existingPost.reactions[reaction]++
+      // }
+    },
     addCurrentUser: {
       reducer(state, action) {
         state.currentUser.push(action.payload);
@@ -30,8 +47,14 @@ const currentUserSlice = createSlice({
       },
     },
   },
+  extraReducers: {
+    [logIn.fulfilled]: (state, action) => {
+      console.log('action.payload', action.payload);
+      return action.payload;
+    },
+  },
 });
 
-export const { addCurrentUser } = currentUserSlice.actions;
+export const { addCurrentUser, logout } = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;

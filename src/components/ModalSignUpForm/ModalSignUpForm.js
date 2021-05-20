@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import useStyles from './styles';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -10,27 +11,60 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { AppContext } from '../../context/AppContext';
-import { SignUpContext } from '../../context/SignUpContext';
+
+import useInputState from '../../hooks/useInputState';
+import userService from '../../services/user';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  toggleSignUp,
+  toggleLogIn,
+  toggleLoading,
+} from '../../features/app/appSlice';
 
 const ModalSignUpForm = (props) => {
   const classes = useStyles(props);
-  const { signUpOpen, handleClose, handleLogInOpen } = useContext(AppContext);
+  const dispatch = useDispatch();
 
-  const {
-    name,
-    setName,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    handleCreateAccount,
-    loading,
-  } = useContext(SignUpContext);
+  const [name, handleNameChange, resetName] = useInputState('');
+  const [username, handleUsernameChange, resetUsername] = useInputState('');
+  const [password, handlePassChange, resetPassword] = useInputState('');
+
+  const signUpOpen = useSelector((state) => state.app.signUpOpen);
+  const loading = useSelector((state) => state.app.loading);
+
+  const handleSignUpClose = () => {
+    dispatch(toggleSignUp());
+  };
+
+  const handleLogInOpen = () => {
+    dispatch(toggleLogIn());
+  };
 
   const handleSignIn = () => {
-    handleClose();
+    handleSignUpClose();
     handleLogInOpen();
+  };
+
+  const handleCreateAccount = async (e) => {
+    e.preventDefault();
+    try {
+      const userObject = {
+        name: name,
+        username: username,
+        password: password,
+      };
+      await userService.create(userObject);
+      resetName();
+      resetUsername();
+      resetPassword();
+      // setTimeout(() => {
+      //   dispatch(toggleLoading);
+      // }, 3000);
+      // dispatch(toggleLoading);
+      // dispatch(handleSignUpClose()); //need to fix this async prop with redux
+    } catch (err) {
+      console.error('Failed to create account: ', err);
+    }
   };
 
   return (
@@ -40,7 +74,7 @@ const ModalSignUpForm = (props) => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={signUpOpen}
-        onClose={handleClose}
+        onClose={handleSignUpClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -59,7 +93,7 @@ const ModalSignUpForm = (props) => {
               <div className={classes.right}>
                 <IconButton
                   aria-label="close window"
-                  onClick={handleClose}
+                  onClick={handleSignUpClose}
                   className={classes.closeBtn}
                   edge="end"
                   size="small"
@@ -80,7 +114,7 @@ const ModalSignUpForm = (props) => {
                 type="text"
                 value={name}
                 name="name"
-                onChange={({ target }) => setName(target.value)}
+                onChange={handleNameChange}
                 autoFocus={true}
               />
               <TextField
@@ -92,7 +126,7 @@ const ModalSignUpForm = (props) => {
                 type="text"
                 value={username}
                 name="Username"
-                onChange={({ target }) => setUsername(target.value)}
+                onChange={handleUsernameChange}
               />
               <TextField
                 id="password"
@@ -103,7 +137,7 @@ const ModalSignUpForm = (props) => {
                 type="password"
                 value={password}
                 name="Password"
-                onChange={({ target }) => setPassword(target.value)}
+                onChange={handlePassChange}
               />
               <Button
                 className={classes.signUpBtn}
@@ -131,8 +165,8 @@ const ModalSignUpForm = (props) => {
   );
 };
 
-ModalSignUpForm.prototype = {
-  classes: PropTypes.object.isRequired,
-};
+// ModalSignUpForm.prototype = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default ModalSignUpForm;

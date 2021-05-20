@@ -7,27 +7,28 @@ const initialState = {
   error: null,
 };
 
-export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
+export const fetchTodos = createAsyncThunk('todos/fetchTodos', async (id) => {
   const response = await todoServices.getAll();
+  const userTodos = response.filter((todo) => todo.user.id === id);
   const responseObject = {
-    todos: response,
+    todos: userTodos,
   };
   return responseObject.todos;
 });
 
 export const addNewTodo = createAsyncThunk(
   'todos/addNewTodo',
-  async (initialTodo) => {
-    const response = await todoServices.create(initialTodo);
+  async (newTodo) => {
+    const response = await todoServices.create(newTodo);
     return response;
   }
 );
 
 export const updateTodo = createAsyncThunk(
   'todos/updateTodo',
-  async (newObject) => {
-    const { id } = newObject;
-    const response = await todoServices.update(id, newObject);
+  async (newTodoObj) => {
+    const { id } = newTodoObj;
+    const response = await todoServices.update(id, newTodoObj);
     return response;
   }
 );
@@ -40,56 +41,7 @@ export const removeTodo = createAsyncThunk('todos/removeTodo', async (id) => {
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
-  reducers: {
-    // todoAdded: {
-    //   reducer(state, action) {
-    //     state.push(action.payload);
-    //   },
-    //   prepare(title, status) {
-    //     return {
-    //       payload: {
-    //         id: nanoid(),
-    //         title,
-    //         status,
-    //       },
-    //     };
-    //   },
-    // },
-    // todoUpdated: {
-    //   reducer(state, action) {
-    //     const { id, title, status } = action.payload;
-    //     const existingTodo = state.todos.find((todo) => todo.id === id);
-    //     if (existingTodo) {
-    //       existingTodo.title = title;
-    //       existingTodo.status = status;
-    //     }
-    //   },
-    //   prepare(id, title, status) {
-    //     return {
-    //       payload: {
-    //         id,
-    //         title,
-    //         status,
-    //       },
-    //     };
-    //   },
-    // },
-    // todoRemoved: {
-    //   reducer(state, action) {
-    //     const todoToRemove = state.todos.findIndex(
-    //       (todo) => todo.id === action.payload
-    //     );
-    //     state.todos.splice(todoToRemove, 1);
-    //   },
-    //   prepare(id) {
-    //     return {
-    //       payload: {
-    //         id,
-    //       },
-    //     };
-    //   },
-    // },
-  },
+  reducers: {},
   extraReducers: {
     [fetchTodos.pending]: (state, action) => {
       state.status = 'loading';
@@ -120,7 +72,6 @@ const todosSlice = createSlice({
     },
   },
 });
-// export const { todoUpdated, todoRemoved } = todosSlice.actions;
 
 export default todosSlice.reducer;
 

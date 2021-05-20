@@ -55,26 +55,26 @@ export const SignUpProvider = (props) => {
     }
   };
 
-  const handleLogIn = async (e) => {
-    e.preventDefault();
-    try {
-      const user = await loginService.login({
-        username,
-        password,
-      });
-      window.localStorage.setItem('loggedInTodoAppUser', JSON.stringify(user));
-      todoService.setToken(user.token);
-      setCurrentUser(user);
-      // dispatch(addCurrentUser(user));
-      setUsername('');
-      setPassword('');
-      setLoggedIn(true);
-      // console.log("you are logged in");
-    } catch (exception) {
-      setPassword('');
-      // console.log("Wrong username or password");
-    }
-  };
+  // const handleLogIn = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const user = await loginService.login({
+  //       username,
+  //       password,
+  //     });
+  //     window.localStorage.setItem('loggedInTodoAppUser', JSON.stringify(user));
+  //     todoService.setToken(user.token);
+  //     setCurrentUser(user);
+  //     // dispatch(addCurrentUser(user));
+  //     setUsername('');
+  //     setPassword('');
+  //     setLoggedIn(true);
+  //     // console.log("you are logged in");
+  //   } catch (exception) {
+  //     setPassword('');
+  //     // console.log("Wrong username or password");
+  //   }
+  // };
 
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -99,7 +99,7 @@ export const SignUpProvider = (props) => {
         setLoggedIn,
         currentUser,
         setCurrentUser,
-        handleLogIn,
+        // handleLogIn,
         handleLogOut,
       }}
     >

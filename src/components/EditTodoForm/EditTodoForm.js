@@ -4,16 +4,14 @@ import useInputState from '../../hooks/useInputState';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTodoById, updateTodo } from '../../features/todo/todosSlice';
-// import { TitleOutlined } from '@material-ui/icons';
 
 const EditTodoForm = (props) => {
   const { id, toggle } = props;
+  const dispatch = useDispatch();
 
   const todo = useSelector((state) => selectTodoById(state, id));
 
   const [title, handleChange, reset] = useInputState(todo.title);
-
-  const dispatch = useDispatch();
 
   return (
     <form

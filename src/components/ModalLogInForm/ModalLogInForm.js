@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import useStyles from './styles';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -10,39 +11,42 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { AppContext } from '../../context/AppContext';
-import { SignUpContext } from '../../context/SignUpContext';
 
-import addCurrentUser from '../../features/currentUser/currentUserSlice';
+import useInputState from '../../hooks/useInputState';
+import { logIn } from '../../features/currentUser/currentUserSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { toggleStatus, toggleLogIn } from '../../features/app/appSlice';
+import todoService from '../../services/todos';
 
 const ModalLogInForm = (props) => {
   const classes = useStyles(props);
-  const { logInOpen, handleLogInClose } = useContext(AppContext);
-  const {
-    username,
-    setUsername,
-    password,
-    setPassword,
-    handleLogIn,
-    loading,
-  } = useContext(SignUpContext);
+  const dispatch = useDispatch();
+  const [username, handleUserChange, resetUser] = useInputState('');
+  const [password, handlePassChange, resetPassword] = useInputState('');
 
-  // const dispatch = useDispatch();
+  const logInOpen = useSelector((state) => state.app.logInOpen);
 
-  // const initialState = {
-  //   _id: '5fdbcffb738d8525006e8494',
-  //   todos: [],
-  //   username: 'rootadmin',
-  //   name: 'nick pre',
-  //   passwordHash:
-  //     '$2b$10$1MGeL7F/oypcfWwWnnw3UOWgDSKpgci0TMg2J2bbl7vx1m6B8cg02',
-  // };
+  const handleLogInClose = () => {
+    dispatch(toggleLogIn());
+  };
 
-  // const logIn = (e) => {
-  //   e.preventDefault();
-  //   dispatch(addCurrentUser(initialState));
-  // };
+  const onLogInClicked = async (e) => {
+    e.preventDefault();
+    try {
+      const resultAction = await dispatch(logIn({ username, password }));
+      dispatch(toggleStatus());
+      window.localStorage.setItem(
+        'loggedInTodoAppUser',
+        JSON.stringify(resultAction.payload.currentUser)
+      );
+      todoService.setToken(resultAction.payload.currentUser.token);
+      resetUser();
+      resetPassword();
+      handleLogInClose();
+    } catch (err) {
+      console.error('Failed to log in: ', err);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -80,7 +84,7 @@ const ModalLogInForm = (props) => {
               <Typography>Sign in to your account here.</Typography>
             </div>
             <Divider />
-            <form className={classes.form} onSubmit={handleLogIn}>
+            <form className={classes.form} onSubmit={onLogInClicked}>
               <TextField
                 id="username"
                 label="Username"
@@ -89,7 +93,7 @@ const ModalLogInForm = (props) => {
                 margin="normal"
                 value={username}
                 name="username"
-                onChange={({ target }) => setUsername(target.value)}
+                onChange={handleUserChange}
                 autoFocus={true}
               />
               <TextField
@@ -101,7 +105,7 @@ const ModalLogInForm = (props) => {
                 margin="normal"
                 value={password}
                 name="password"
-                onChange={({ target }) => setPassword(target.value)}
+                onChange={handlePassChange}
               />
               <Button
                 className={classes.signUpBtn}
@@ -109,7 +113,7 @@ const ModalLogInForm = (props) => {
                 variant="contained"
                 color="primary"
                 fullWidth
-                disabled={loading}
+                // disabled={loading}
               >
                 Sign in
               </Button>
@@ -127,8 +131,8 @@ const ModalLogInForm = (props) => {
   );
 };
 
-ModalLogInForm.prototype = {
-  classes: PropTypes.object.isRequired,
-};
+// ModalLogInForm.prototype = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default ModalLogInForm;

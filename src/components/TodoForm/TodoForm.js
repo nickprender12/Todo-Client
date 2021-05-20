@@ -6,9 +6,8 @@ import useStyles from './styles';
 import { unwrapResult } from '@reduxjs/toolkit';
 
 import { useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 
-import { todoAdded, addNewTodo } from '../../features/todo/todosSlice';
+import { addNewTodo } from '../../features/todo/todosSlice';
 
 const TodoForm = (props) => {
   const classes = useStyles(props);
@@ -20,8 +19,7 @@ const TodoForm = (props) => {
     try {
       setAddRequestStatus('pending');
       const resultAction = await dispatch(addNewTodo({ title, status: false }));
-      // console.log('from todo clicked', resultAction);
-      unwrapResult(resultAction); //remove payload
+      unwrapResult(resultAction);
       reset();
     } catch (err) {
       console.error('Failed to save the post: ', err);
@@ -38,7 +36,6 @@ const TodoForm = (props) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          // dispatch(todoAdded(title, false));
           onNewTodoClicked();
         }}
       >

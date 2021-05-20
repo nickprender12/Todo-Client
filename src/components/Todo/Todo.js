@@ -40,7 +40,6 @@ const Todo = (props) => {
               tabIndex={-1}
               checked={status}
               onClick={() => {
-                // dispatch(todoUpdated(id, title, !status));
                 dispatch(updateTodo({ title: title, status: !status, id }));
               }}
             />
