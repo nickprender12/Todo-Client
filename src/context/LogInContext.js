@@ -1,12 +1,15 @@
-import React, { createContext, useState, useEffect } from "react";
-import loginService from "../services/login";
-import todoService from "../services/todos";
+import React, { createContext, useState, useEffect } from 'react';
+import loginService from '../services/login';
+import todoService from '../services/todos';
+
+import addCurrentUser from '../features/currentUser/currentUserSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const LogInContext = createContext();
 
 export const LogInProvider = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   // const [user, setUser] = useState(null);
@@ -20,6 +23,8 @@ export const LogInProvider = (props) => {
   //   }
   // }, []);
 
+  const dispatch = useDispatch();
+
   const handleLogIn = async (e) => {
     e.preventDefault();
     try {
@@ -27,18 +32,20 @@ export const LogInProvider = (props) => {
         username,
         password,
       });
-      window.localStorage.setItem("loggedInTodoAppUser", JSON.stringify(user));
+      window.localStorage.setItem('loggedInTodoAppUser', JSON.stringify(user));
       todoService.setToken(user.token);
       setCurrentUser(user);
-      setUsername("");
-      setPassword("");
+      //this is where i can run dispach to set my state.
+      dispatch(addCurrentUser(user));
+      setUsername('');
+      setPassword('');
       // setLoggedIn(true);
       // console.log('you are logged in');
       // console.log(user);
       // console.log("current user: ", currentUser.username);
       // console.log("did it work?");
     } catch (exception) {
-      setPassword("");
+      setPassword('');
       // console.log("Wrong username or password");
     }
   };

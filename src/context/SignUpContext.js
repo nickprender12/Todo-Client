@@ -1,25 +1,31 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import userService from "../services/user";
-import loginService from "../services/login";
-import todoService from "../services/todos";
-import { AppContext } from "./AppContext";
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import userService from '../services/user';
+import loginService from '../services/login';
+import todoService from '../services/todos';
+import { AppContext } from './AppContext';
+
+// import addCurrentUser from '../features/currentUser/currentUserSlice';
+// import { useDispatch, useSelector } from 'react-redux';
 
 export const SignUpContext = createContext();
 
 export const SignUpProvider = (props) => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const { handleClose, setMessage, handleLogInClose } = useContext(AppContext);
 
+  // const dispatch = useDispatch();
+
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedInTodoAppUser");
+    const loggedUserJSON = window.localStorage.getItem('loggedInTodoAppUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setCurrentUser(user);
+      // dispatch(addCurrentUser(user));
       // console.log("userId:", user);
       todoService.setToken(user.token);
     }
@@ -34,11 +40,11 @@ export const SignUpProvider = (props) => {
         password: password,
       };
       await userService.create(userObject);
-      setName("");
-      setUsername("");
-      setPassword("");
+      setName('');
+      setUsername('');
+      setPassword('');
       handleClose();
-      setMessage("You did it!");
+      setMessage('You did it!');
       setTimeout(() => {
         setMessage(null);
       }, 3000);
@@ -49,25 +55,26 @@ export const SignUpProvider = (props) => {
     }
   };
 
-  const handleLogIn = async (e) => {
-    e.preventDefault();
-    try {
-      const user = await loginService.login({
-        username,
-        password,
-      });
-      window.localStorage.setItem("loggedInTodoAppUser", JSON.stringify(user));
-      todoService.setToken(user.token);
-      setCurrentUser(user);
-      setUsername("");
-      setPassword("");
-      setLoggedIn(true);
-      // console.log("you are logged in");
-    } catch (exception) {
-      setPassword("");
-      // console.log("Wrong username or password");
-    }
-  };
+  // const handleLogIn = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const user = await loginService.login({
+  //       username,
+  //       password,
+  //     });
+  //     window.localStorage.setItem('loggedInTodoAppUser', JSON.stringify(user));
+  //     todoService.setToken(user.token);
+  //     setCurrentUser(user);
+  //     // dispatch(addCurrentUser(user));
+  //     setUsername('');
+  //     setPassword('');
+  //     setLoggedIn(true);
+  //     // console.log("you are logged in");
+  //   } catch (exception) {
+  //     setPassword('');
+  //     // console.log("Wrong username or password");
+  //   }
+  // };
 
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -92,7 +99,7 @@ export const SignUpProvider = (props) => {
         setLoggedIn,
         currentUser,
         setCurrentUser,
-        handleLogIn,
+        // handleLogIn,
         handleLogOut,
       }}
     >

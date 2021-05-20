@@ -1,15 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles';
 import PropTypes from 'prop-types';
 import ModalSignUpForm from '../ModalSignUpForm';
 import ModalLogInForm from '../ModalLogInForm';
-import ModalWelcomeNewUser from '../ModalWelcomeNewUser';
-import { AppContext } from '../../context/AppContext';
+// import ModalWelcomeNewUser from '../ModalWelcomeNewUser';
+import { useDispatch } from 'react-redux';
+import { toggleSignUp } from '../../features/app/appSlice';
 
 const Body = (props) => {
   const classes = useStyles(props);
-  const { handleOpen } = useContext(AppContext);
+
+  const dispatch = useDispatch();
+  const handleOpen = () => {
+    dispatch(toggleSignUp());
+  };
 
   return (
     <div>
@@ -38,7 +43,7 @@ const Body = (props) => {
       </div>
       <ModalSignUpForm />
       <ModalLogInForm />
-      <ModalWelcomeNewUser />
+      {/* <ModalWelcomeNewUser /> */}
     </div>
   );
 };

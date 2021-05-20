@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-import axios from "axios";
+import axios from 'axios';
 
-const baseUrl = "/api/todos";
+const baseUrl = '/api/todos';
 let token = null;
 
 const setToken = (newToken) => {
@@ -29,7 +29,10 @@ const update = (id, newObject) => {
 
 const remove = (id) => {
   const request = axios.delete(`${baseUrl}/${id}`);
-  return request.then((response) => response.data);
+
+  return request.then((response) => {
+    return response.data;
+  });
 };
 
 export default { getAll, create, update, remove, setToken };

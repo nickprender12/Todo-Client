@@ -1,18 +1,42 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles';
 import Typography from '@material-ui/core/Typography';
-import { AppContext } from '../../context/AppContext';
-import { SignUpContext } from '../../context/SignUpContext';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../features/currentUser/currentUserSlice';
+import {
+  toggleStatus,
+  toggleSignUp,
+  toggleLogIn,
+} from '../../features/app/appSlice';
+
 const NavBar = (props) => {
   const classes = useStyles(props);
-  const { handleOpen, handleLogInOpen } = useContext(AppContext);
-  const { handleLogOut, currentUser } = useContext(SignUpContext);
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser);
+
+  const handleSignUpOpen = () => {
+    dispatch(toggleSignUp());
+  };
+
+  const handleLogInOpen = () => {
+    dispatch(toggleLogIn());
+  };
+
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    if (currentUser.currentUser) {
+      dispatch(toggleStatus());
+      dispatch(logout());
+      window.localStorage.clear();
+    }
+  };
 
   return (
     <div className={classes.root}>
       <div className={classes.tuduLogo}>TuDu</div>
-      {currentUser === null ? (
+      {currentUser.currentUser === null ? (
         <div className={classes.btnList}>
           <Button
             className={classes.logInBtn}
@@ -22,7 +46,7 @@ const NavBar = (props) => {
             Sign In
           </Button>
           <Button
-            onClick={handleOpen}
+            onClick={handleSignUpOpen}
             variant="contained"
             className={classes.signUpBtn}
           >
@@ -32,7 +56,7 @@ const NavBar = (props) => {
       ) : (
         <div className={classes.btnList}>
           <Typography className={classes.username}>
-            {currentUser.username} logged in
+            {currentUser.currentUser.username} logged in
           </Typography>
           <Button
             style={{ textTransform: 'none' }}

@@ -10,29 +10,21 @@ import useToggleState from '../../hooks/useToggleState';
 import { EditTodoForm } from '../index';
 import Divider from '@material-ui/core/Divider';
 
+import { useDispatch } from 'react-redux';
+import { updateTodo, removeTodo } from '../../features/todo/todosSlice';
+
 const Todo = (props) => {
-  const {
-    title,
-    status,
-    removeTodo,
-    id,
-    toggleTodo,
-    editTodo,
-    index,
-    listLength,
-  } = props;
+  const { title, status, id, index, listLength } = props;
   const [isEditing, toggle] = useToggleState(false);
+
+  const dispatch = useDispatch();
+
   return (
     <>
       <ListItem style={{ height: '64px' }} key={id}>
         {isEditing ? (
           <>
-            <EditTodoForm
-              editTodo={editTodo}
-              id={id}
-              title={title}
-              toggle={toggle}
-            />
+            <EditTodoForm id={id} toggle={toggle} />
             <>
               <IconButton aria-label="Delete" disabled>
                 <DeleteIcon />
@@ -47,7 +39,9 @@ const Todo = (props) => {
             <CheckBox
               tabIndex={-1}
               checked={status}
-              onClick={() => toggleTodo(id)}
+              onClick={() => {
+                dispatch(updateTodo({ title: title, status: !status, id }));
+              }}
             />
             <ListItemText
               style={{ textDecoration: status ? 'line-through' : 'none' }}
@@ -55,7 +49,12 @@ const Todo = (props) => {
               {title}
             </ListItemText>
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
+              <IconButton
+                aria-label="Delete"
+                onClick={() => {
+                  dispatch(removeTodo(id));
+                }}
+              >
                 <DeleteIcon />
               </IconButton>
               <IconButton aria-label="Edit" onClick={toggle}>
