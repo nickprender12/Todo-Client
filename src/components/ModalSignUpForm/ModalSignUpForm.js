@@ -53,15 +53,18 @@ const ModalSignUpForm = (props) => {
         username: username,
         password: password,
       };
-      await userService.create(userObject);
-      resetName();
-      resetUsername();
-      resetPassword();
-      // setTimeout(() => {
-      //   dispatch(toggleLoading);
-      // }, 3000);
-      // dispatch(toggleLoading);
-      // dispatch(handleSignUpClose()); //need to fix this async prop with redux
+      const user = await userService.create(userObject);
+      console.log(user);
+      if (user) {
+        resetName();
+        resetUsername();
+        resetPassword();
+        setTimeout(() => {
+          dispatch(toggleLoading);
+        }, 3000);
+        dispatch(toggleLoading);
+        dispatch(toggleSignUp());
+      }
     } catch (err) {
       console.error('Failed to create account: ', err);
     }
