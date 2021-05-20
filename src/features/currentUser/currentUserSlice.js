@@ -20,28 +20,19 @@ const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
   reducers: {
-    logout(state, action) {
-      state.currentUser = null;
-      // window.localStorage.clear();
-      // handleLogInClose();
-      //const { postId, reaction } = action.payload
-      // existingPost = state.posts.find((post) => post.id === postId)
-      // if (existingPost) {
-      //   existingPost.reactions[reaction]++
-      // }
-    },
+    logout: (state) => {},
     addCurrentUser: {
       reducer(state, action) {
-        state.currentUser.push(action.payload);
+        // state.currentUser.push(action.payload);
+        state.currentUser = action.payload;
       },
-      prepare(_id, todos, username, name, passwordHash) {
+      prepare({ id, name, token, username }) {
         return {
           payload: {
-            _id,
-            todos,
-            username,
+            id,
             name,
-            passwordHash,
+            token,
+            username,
           },
         };
       },

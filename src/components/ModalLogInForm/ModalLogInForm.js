@@ -34,15 +34,20 @@ const ModalLogInForm = (props) => {
     e.preventDefault();
     try {
       const resultAction = await dispatch(logIn({ username, password }));
-      dispatch(toggleStatus());
-      window.localStorage.setItem(
-        'loggedInTodoAppUser',
-        JSON.stringify(resultAction.payload.currentUser)
-      );
-      todoService.setToken(resultAction.payload.currentUser.token);
-      resetUser();
-      resetPassword();
-      handleLogInClose();
+      //I should do testing here to see if the function changes state if username and password are not valid//
+      // console.log('result action ', resultAction);
+      if (resultAction.payload) {
+        //bad fix need better error checking strat
+        dispatch(toggleStatus());
+        window.localStorage.setItem(
+          'loggedInTodoAppUser',
+          JSON.stringify(resultAction.payload.currentUser)
+        );
+        todoService.setToken(resultAction.payload.currentUser.token);
+        resetUser();
+        resetPassword();
+        handleLogInClose();
+      }
     } catch (err) {
       console.error('Failed to log in: ', err);
     }
